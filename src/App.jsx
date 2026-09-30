@@ -10,38 +10,40 @@ import { FaReact, FaNodeJs, FaNpm, FaHeart, FaStar, FaRocket } from 'react-icons
 // EXERCÍCIO 2 - react-confetti
 // TODO: Descomente a linha abaixo após instalar
 // ============================================
-// import Confetti from 'react-confetti'
+// import Confetti from 'react-confetti'/
 
 // ============================================
 // EXERCÍCIO 3 - dayjs
 // TODO: Descomente a linha abaixo após instalar
 // ============================================
-// import dayjs from 'dayjs'
+import dayjs from 'dayjs'
+
+
 
 // ============================================
 // EXERCÍCIO 4 - react-toastify
 // TODO: Descomente as linhas abaixo após instalar
 // ============================================
-// import { ToastContainer, toast } from 'react-toastify'
-// import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 // ============================================
 // EXERCÍCIO 5 - uuid
 // TODO: Descomente a linha abaixo após instalar
 // ============================================
-// import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 
 // ============================================
 // EXERCÍCIO 6 - react-spinners
 // TODO: Descomente a linha abaixo após instalar
 // ============================================
-// import { ClipLoader, BounceLoader, RingLoader, PulseLoader } from 'react-spinners'
+import { ClipLoader, BounceLoader, RingLoader, PulseLoader } from 'react-spinners'
 
 // ============================================
 // EXERCÍCIO 7 - react-type-animation
 // TODO: Descomente a linha abaixo após instalar
 // ============================================
-// import { TypeAnimation } from 'react-type-animation'
+import { TypeAnimation } from 'react-type-animation'
 
 function App() {
   // Estado para exercício 2 (confetti)
@@ -163,10 +165,10 @@ dayjs('2026-12-25').diff(dayjs(), 'day') // dias até Natal`}</pre>
 
             <div className="preview-area" style={{ textAlign: 'left', fontStyle: 'normal', fontFamily: 'monospace' }}>
               {/* TODO: Substitua os "???" usando dayjs() */}
-              <p>Data de hoje: <strong>???</strong></p>
-              <p>Hora atual: <strong>???</strong></p>
-              <p>Dia da semana: <strong>???</strong></p>
-              <p>Dias para o Natal: <strong>???</strong></p>
+              <p>Data de hoje: <strong>{dayjs().format('DD/MM/YYYY')}</strong></p>
+              <p>Hora atual: <strong>{dayjs().format('HH:mm:ss')}</strong></p>
+              <p>Dia da semana: <strong>{dayjs().format('dddd')}</strong></p>
+              <p>Dias para o Natal: <strong>{dayjs('2026-12-25').diff(dayjs(), 'day')}</strong></p>
               <p>Dias desde 01/01/2000: <strong>???</strong></p>
             </div>
           </div>
@@ -206,26 +208,26 @@ toast.warn('Cuidado!')`}</pre>
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '0.5rem' }}>
               <button className="btn btn-green" onClick={() => {
                 // TODO: Substitua o alert por toast.success('Parabens! Voce conseguiu!')
-                alert('TODO: Substitua por toast.success()')
+                toast.success('Parabens! O lorenzzo é gay!')
               }}>Sucesso</button>
 
               <button className="btn" style={{ background: '#da3633' }} onClick={() => {
                 // TODO: Substitua o alert por toast.error('Algo deu errado!')
-                alert('TODO: Substitua por toast.error()')
+                toast.error('Algo deu errado! Como assim o lorenzzo n é gay?')
               }}>Erro</button>
 
               <button className="btn btn-blue" onClick={() => {
                 // TODO: Substitua o alert por toast.info('Voce sabia? NPM tem mais de 2 milhões de pacotes!')
-                alert('TODO: Substitua por toast.info()')
+                toast.info('Voce sabia? O lorenzzo é gay!')
               }}>Info</button>
 
               <button className="btn" style={{ background: '#d29922' }} onClick={() => {
                 // TODO: Substitua o alert por toast.warn('Cuidado com pacotes desconhecidos!')
-                alert('TODO: Substitua por toast.warn()')
+                toast.warn('Cuidado com lorenzzo gay!')
               }}>Aviso</button>
             </div>
 
-            {/* TODO: Adicione <ToastContainer /> aqui */}
+            <ToastContainer />
           </div>
         </div>
 
@@ -266,12 +268,12 @@ setUsuarios([...usuarios, novoUsuario])`}</pre>
               />
               <button className="btn btn-green" onClick={() => {
                 if (!nomeInput.trim()) return
-                // TODO: Crie o usuario com uuidv4() como id
-                // TODO: Adicione ao array com setUsuarios
-                // TODO: Limpe o input com setNomeInput('')
-
-                // Remova este alert quando implementar:
-                alert('TODO: Implemente a criação do usuario com uuid')
+                const novoUsuario = {
+                  id: uuidv4(),           // "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d"
+                  nome: nomeInput,
+                  criadoEm: new Date().toLocaleString()
+                }
+                setUsuarios([...usuarios, novoUsuario])
               }}>Adicionar</button>
             </div>
 
@@ -326,10 +328,10 @@ setUsuarios([...usuarios, novoUsuario])`}</pre>
               {loading
                 ? <>
                     {/* TODO: Substitua estes textos pelos componentes de spinner */}
-                    <span>ClipLoader</span>
-                    <span>BounceLoader</span>
-                    <span>RingLoader</span>
-                    <span>PulseLoader</span>
+                    <span><ClipLoader color="#58a6ff" loading={loading} size={50} /></span>
+                    <span><BounceLoader color="#58a6ff" loading={loading} size={50} /></span>
+                    <span><RingLoader color="#58a6ff" loading={loading} size={50} /></span>
+                    <span><PulseLoader color="#58a6ff" loading={loading} size={50} /></span>
                   </>
                 : 'Clique no botao para ver os spinners'
               }
@@ -371,8 +373,19 @@ setUsuarios([...usuarios, novoUsuario])`}</pre>
 />`}</pre>
 
             <div className="preview-area" style={{ fontStyle: 'normal', fontSize: '1.5rem' }}>
-              {/* TODO: Substitua o texto abaixo pelo componente <TypeAnimation /> */}
-              <h2 style={{ color: '#58a6ff' }}>Texto animado vai aparecer aqui...</h2>
+              {<TypeAnimation
+  sequence={[
+    'O', 2000,
+    'lorenzzo', 2000,
+    'é', 2000,
+    'gay!', 2000,
+  ]}
+  wrapper="h2"
+  speed={50}
+  repeat={Infinity}
+  style={{ color: '#58a6ff' }}
+/>}
+              
             </div>
           </div>
         </div>
